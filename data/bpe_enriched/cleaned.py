@@ -49,10 +49,8 @@ def find_outside(context, commune_id):
 
 def execute(context):
     df, df_so = context.stage("data.bpe.raw")
-    pd.set_option('display.max_rows', 500)
-    pd.set_option('display.max_columns', 100)
-    pd.set_option('display.width', 1000)
 
+    # Collect information on cultural and education activities in Rennes Métropole
     df_so = df_so[(df_so['nom_theme_principal'] == "Culture/Socioculturel") | df_so['nom_activite_principale'].isin(['Secondaire', 'Supérieur'])].copy()
     df_so['enterprise_id'] = np.arange(len(df), len(df) + len(df_so))
     df_so.rename(columns={"code_insee": "commune_id", "X": "x", "Y": "y"}, inplace=True)
@@ -62,7 +60,7 @@ def execute(context):
     df_so["activity_type"] = df_so["activity_type"].astype("category")
     df_so['imputed'] = "False"
 
-    # Used QGIS to filter and convert to Lambert 93
+    # I used QGIS to filter and convert to Lambert 93
     df_so["x"] = df_so["x"].astype(np.float)
     df_so["y"] = df_so["y"].astype(np.float)
     df_so = df_so.round(3)
@@ -151,6 +149,7 @@ def execute(context):
     df = df[["enterprise_id", "activity_type", "commune_id", "imputed", "x", "y"]]
     df_so = df_so[["enterprise_id", "activity_type", "commune_id", "imputed", "x", "y"]]
 
+    # Replace cultural and education activities locations inside Rennes Métropole
     df_out = df[~df['commune_id'].isin(Rennes_Métropole)]
     print('BPE OUTSIDE RM', len(df_out))
     df_in = df[df['commune_id'].isin(Rennes_Métropole)]
@@ -166,7 +165,7 @@ def execute(context):
     # print(df)
 
     df = spatial_utils.to_gpd(context, df.copy())
-    df.to_csv('cleaned_bpe.csv')
-    print(df['activity_type'].unique())
+    # df.to_csv('cleaned_bpe.csv')
+    # print(df['activity_type'].unique())
 
     return df
