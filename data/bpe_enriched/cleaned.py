@@ -12,7 +12,7 @@ This stage cleans the enterprise census:
 """
 
 def configure(context):
-    context.stage("data.bpe.raw")
+    context.stage("data.bpe_enriched.raw")
 
     context.stage("data.spatial.iris")
     context.stage("data.spatial.municipalities")
@@ -48,7 +48,7 @@ def find_outside(context, commune_id):
     return indices
 
 def execute(context):
-    df, df_so = context.stage("data.bpe.raw")
+    df, df_so = context.stage("data.bpe_enriched.raw")
 
     # Collect information on cultural and education activities in Rennes Métropole
     df_so = df_so[(df_so['nom_theme_principal'] == "Culture/Socioculturel") | df_so['nom_activite_principale'].isin(['Secondaire', 'Supérieur'])].copy()
