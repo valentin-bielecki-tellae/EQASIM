@@ -30,10 +30,10 @@ def execute(context):
 
     # remove_ids |= set(df_persons[~df_persons["departement_id"].isin(requested_departments)])
 
-    df = df_trips.groupby(['origin_departement_id', 'destination_departement_id'])['trip_weight'].agg('sum').reset_index(name='trip_weight')
-    df['trip_weight'].fillna(0, inplace=True)
-    df['trip_weight'] = df['trip_weight'].map(lambda x: int(x))
-    df.to_csv('departement_matrix_od.csv')
+    # df = df_trips.groupby(['origin_departement_id', 'destination_departement_id'])['trip_weight'].agg('sum').reset_index(name='trip_weight')
+    # df['trip_weight'].fillna(0, inplace=True)
+    # df['trip_weight'] = df['trip_weight'].map(lambda x: int(x))
+    # df.to_csv('departement_matrix_od.csv')
 
     df_trips = df_trips[~df_trips["person_id"].isin(remove_ids)]
 
@@ -58,8 +58,7 @@ def execute(context):
     hts.check(df_households, df_persons, df_trips)
     print('NUMBER OF TRIPS', df_trips['trip_weight'].sum())
 
-    df_trips.to_csv('trips_emc²_35.csv', index=False)
-    df_households.to_csv('households_emc²_35.csv', index=False)
-    df_persons.to_csv('persons_emc²_35.csv', index=False)
-    print('========= SAVED =========')
+    # df_trips.to_csv('trips_emc²_35.csv', index=False)
+    # df_households.to_csv('households_emc²_35.csv', index=False)
+    # df_persons.to_csv('persons_emc²_35.csv', index=False)
     return df_households, df_persons, df_trips

@@ -21,8 +21,6 @@ def execute(context):
     # 1) Filter persons for which we don't have trip information
     df_persons = df_persons[df_persons["number_of_trips"] >= 0].copy()
 
-    print(df_persons['person_weight'].sum())
-
     # 2) Override weights with the correct weights for the people which have trip information
     df_persons["person_weight"] = df_persons["trip_weight"]
     print(df_persons['person_weight'].sum())
