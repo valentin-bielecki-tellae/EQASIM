@@ -23,7 +23,6 @@ def execute(context):
 
     # 2) Override weights with the correct weights for the people which have trip information
     df_persons["person_weight"] = df_persons["trip_weight"]
-    print(df_persons['person_weight'].sum())
-    print(df_trips['trip_weight'].sum())
-    exit(0)
+    df_trips['trip_weight'] =  df_trips['trip_weight'] * 1.2  # we want at least 4 millions trips
+
     return df_households, df_persons, df_trips
