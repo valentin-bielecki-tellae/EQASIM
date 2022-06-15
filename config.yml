@@ -1,4 +1,4 @@
-## Synthetic population pipeline for Rennes
+## Synthetic population pipeline for Nantes
 ## based on the synpp package
 
 # This is the path to a directory where the pipeline can store temporary data
@@ -15,21 +15,23 @@ config:
   processes: 4
 
   # Define whether to use ENTD or EGT as the household travel survey (HTS)
-  hts: emc²_35
+  hts: edgt_44
 
   # Define sampling rate and random seed for the output population
-  sampling_rate: 0.001
+  sampling_rate: 1
   random_seed: 1234
   
   # Paths to the input data and where the output should be stored
   data_path: /home/valentin/data/EQASIM/data
   output_path: /home/valentin/data/EQASIM/output
-  output_prefix: rennes_0.001_
+  output_prefix: nantes_
 
   # Only interesting if you run the simulation
   java_memory: 14G
 
-  # Rennes settings
+  # Nantes settings
   census_path: rp_2015/FD_INDCVIZC_2015.dbf
   regions: []
-  departments: [35]
+  departments: [44]
+  gtfs_path: gtfs/export_gtfs_voyages.zip;gtfs/export-intercites-gtfs-last.zip;gtfs/export-ter-gtfs-last.zip;gtfs/brevibus.gtfs.zip;gtfs/gtfs-tan.zip;gtfs/lilapresquile.gtfs.zip;gtfs/loire-atlantique915785.zip;gtfs/pdl44.zip;gtfs/stran-merge.gtfs.zip
+  osm_path: osm/pays-de-la-loire-latest.osm.pbf
