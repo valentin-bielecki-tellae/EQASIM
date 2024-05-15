@@ -7,24 +7,34 @@ This stage provides a list of home places that serve as potential locations for
 home activities.
 """
 
+
 def configure(context):
     context.stage("data.spatial.iris")
-    context.stage("synthesis.locations.home.addresses")
+    if context.config("home_location_source", "addresses") == "tiles":
+        context.stage("data.tiles.raw")
+    else:
+        context.stage("synthesis.locations.home.addresses")
+
 
 def execute(context):
     # Find required IRIS
     df_iris = context.stage("data.spatial.iris")
     required_iris = set(df_iris["iris_id"].unique())
-    
+
     # Load all addresses and add IRIS information
-    df_addresses = context.stage("synthesis.locations.home.addresses")
+    df_addresses = (
+        context.stage("data.tiles.raw")
+        if context.config("home_location_source") == "tiles"
+        else context.stage("synthesis.locations.home.addresses")
+    )
 
     print("Imputing IRIS into addresses ...")
-   
-    df_addresses = gpd.sjoin(df_addresses,
-        df_iris[["iris_id", "commune_id", "geometry"]], predicate = "within")
+
+    df_addresses = gpd.sjoin(
+        df_addresses, df_iris[["iris_id", "commune_id", "geometry"]], predicate="within"
+    )
     del df_addresses["index_right"]
-    
+
     df_addresses.loc[df_addresses["iris_id"].isna(), "iris_id"] = "unknown"
     df_addresses["iris_id"] = df_addresses["iris_id"].astype("category")
 
@@ -34,22 +44,35 @@ def execute(context):
     missing_iris = required_iris - set(df_addresses["iris_id"].unique())
 
     if len(missing_iris) > 0:
-        print("Adding homes at the centroid of %d/%d IRIS without BDTOPO observations" % (
-            len(missing_iris), len(required_iris)))
+        print(
+            "Adding homes at the centroid of %d/%d IRIS without BDTOPO observations"
+            % (len(missing_iris), len(required_iris))
+        )
 
         df_added = []
-
+        id_name = (
+            "id_tiles"
+            if context.config("home_location_source") == "tiles"
+            else "building_id"
+        )
         for iris_id in sorted(missing_iris):
-            centroid = df_iris[df_iris["iris_id"] == iris_id]["geometry"].centroid.iloc[0]
+            centroid = df_iris[df_iris["iris_id"] == iris_id]["geometry"].centroid.iloc[
+                0
+            ]
 
-            df_added.append({
-                "iris_id": iris_id, "geometry": centroid,
-                "commune_id": iris_id[:5],
-                "weight" : 1,
-                "building_id": -1
-            })
+            df_added.append(
+                {
+                    "iris_id": iris_id,
+                    "geometry": centroid,
+                    "commune_id": iris_id[:5],
+                    "weight": 1,
+                    id_name: -1,
+                }
+            )
 
-        df_added = gpd.GeoDataFrame(pd.DataFrame.from_records(df_added), crs = df_addresses.crs)
+        df_added = gpd.GeoDataFrame(
+            pd.DataFrame.from_records(df_added), crs=df_addresses.crs
+        )
         df_added["fake"] = True
 
         df_addresses = pd.concat([df_addresses, df_added])

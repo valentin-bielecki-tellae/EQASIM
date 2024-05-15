@@ -3,11 +3,14 @@ import numpy as np
 import pandas as pd
 import geopandas as gpd
 
+
 def configure(context):
     context.stage("synthesis.population.spatial.home.zones")
     context.stage("synthesis.locations.home.locations")
+    context.config("home_location_source", "addresses")
 
     context.config("random_seed")
+
 
 def _sample_locations(context, args):
     # Extract data sets
@@ -34,32 +37,45 @@ def _sample_locations(context, args):
     cdf = np.cumsum(df_locations["weight"].values)
     cdf /= cdf[-1]
 
-    indices = np.array([np.count_nonzero(cdf < u) 
-        for u in random.random_sample(size = home_count)])
-    
+    indices = np.array(
+        [np.count_nonzero(cdf < u) for u in random.random_sample(size=home_count)]
+    )
+
     # Apply selection
     df_homes["geometry"] = df_locations.iloc[indices]["geometry"].values
-    df_homes["building_id"] = df_locations.iloc[indices]["building_id"].values
-    
+    if context.config("home_location_source") == "tiles":
+        df_homes["id_tiles"] = df_locations.iloc[indices]["id_tiles"].values
+    else:
+        df_homes["building_id"] = df_locations.iloc[indices]["building_id"].values
+
     # Update progress
     context.progress.update()
 
-    return gpd.GeoDataFrame(df_homes, crs = df_locations.crs)
+    return gpd.GeoDataFrame(df_homes, crs=df_locations.crs)
+
 
 def execute(context):
     random = np.random.RandomState(context.config("random_seed"))
 
     df_homes = context.stage("synthesis.population.spatial.home.zones")
     df_locations = context.stage("synthesis.locations.home.locations")
-                   
+
     # Sample locations for home
     unique_iris_ids = sorted(set(df_homes["iris_id"].unique()))
 
-    with context.progress(label = "Sampling home locations ...", total = len(unique_iris_ids)):
-        with context.parallel(dict(
-            df_locations = df_locations, df_homes = df_homes
-        )) as parallel:
-            seeds = random.randint(10000, size = len(unique_iris_ids))
-            df_homes = pd.concat(parallel.map(_sample_locations, zip(unique_iris_ids, seeds)))
-
-    return df_homes[["household_id", "commune_id", "building_id", "geometry"]]
+    with context.progress(
+        label="Sampling home locations ...", total=len(unique_iris_ids)
+    ):
+        with context.parallel(
+            dict(df_locations=df_locations, df_homes=df_homes)
+        ) as parallel:
+            seeds = random.randint(10000, size=len(unique_iris_ids))
+            df_homes = pd.concat(
+                parallel.map(_sample_locations, zip(unique_iris_ids, seeds))
+            )
+    out = (
+        ["household_id", "commune_id", "id_tiles", "geometry"]
+        if context.config("home_location_source") == "tiles"
+        else ["household_id", "commune_id", "building_id", "geometry"]
+    )
+    return df_homes[out]
