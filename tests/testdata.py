@@ -240,6 +240,28 @@ def create(output_path):
     # Required attributes: CODGEO, D115, ..., D915
     print("Creating FILOSOFI ...")
 
+    # Use the following columns for the 'by attributes' data set
+    # {
+    #     "name": "size",
+    #     "modalities": [
+    #         {"name": "1_pers", "sheet": "TAILLEM_1", "col_pattern": "TME1"},
+    #         {"name": "2_pers", "sheet": "TAILLEM_2", "col_pattern": "TME2"},
+    #         {"name": "3_pers", "sheet": "TAILLEM_3", "col_pattern": "TME3"},
+    #         {"name": "4_pers", "sheet": "TAILLEM_4", "col_pattern": "TME4"},
+    #         {"name": "5_pers_or_more", "sheet": "TAILLEM_5", "col_pattern": "TME5"},
+    #     ],
+    # },
+    # {
+    #     "name": "family_comp",
+    #     "modalities": [
+    #         {"name": "Single_man", "sheet": "TYPMENR_1", "col_pattern": "TYM1"},
+    #         {"name": "Single_wom", "sheet": "TYPMENR_2", "col_pattern": "TYM2"},
+    #         {"name": "Couple_without_child", "sheet": "TYPMENR_3", "col_pattern": "TYM3"},
+    #         {"name": "Couple_with_child", "sheet": "TYPMENR_4", "col_pattern": "TYM4"},
+    #         {"name": "Single_parent", "sheet": "TYPMENR_5", "col_pattern": "TYM5"},
+    #         {"name": "complex_hh", "sheet": "TYPMENR_6", "col_pattern": "TYM6"},
+    #     ],
+    # },
 
     df_income = df.drop_duplicates("municipality")[["municipality"]].rename(columns = dict(municipality = "CODGEO"))
     df_income["D119"] = 9122.0
