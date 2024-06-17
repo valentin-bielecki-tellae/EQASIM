@@ -1,4 +1,4 @@
-from synthesis.population.income.uniform import MAXIMUM_INCOME_FACTOR
+from synthesis.population.income.utils import MAXIMUM_INCOME_FACTOR
 from bhepop2.tools import add_household_size_attribute, add_household_type_attribute
 from bhepop2.sources.marginal_distributions import QuantitativeMarginalDistributions
 import pandas as pd
@@ -17,7 +17,7 @@ def configure(context):
     context.config("output_path")
     context.stage("data.income.municipality")
     context.stage("synthesis.population.income.uniform", alias="uniform")
-    context.stage("synthesis.population.income.bhepop2_income", alias="bhepop2")
+    context.stage("synthesis.population.income.bhepop2", alias="bhepop2")
     context.stage("synthesis.population.sampled")
 
 
@@ -83,12 +83,11 @@ def execute(context):
     if not os.path.exists(compare_output_path):
         os.mkdir(compare_output_path)
 
-
     # create an analysis instance
     analysis = marginal_distributions_source.compare_with_populations(
         {
-            "Eqasim original method": uniform_pop_df,
-            "Bhepop2 method": bhepop2_pop_df
+            "Uniform": uniform_pop_df,
+            "Bhepop2": bhepop2_pop_df
         },
         feature_name="household_income",
         output_folder=compare_output_path
