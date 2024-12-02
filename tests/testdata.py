@@ -790,12 +790,12 @@ def create(output_path):
         f.write(bytes("\n".join(osm), "utf-8"))
 
 
-    # import subprocess
+    import subprocess
 
-    # subprocess.check_call([
-    #     shutil.which("osmosis"), "--read-xml", "%s/osm_idf/ile-de-france-220101.osm.gz" % output_path,
-    #     "--write-pbf", "%s/osm_idf/ile-de-france-220101.osm.pbf" % output_path
-    # ])
+    subprocess.check_call([
+        shutil.which("osmosis"), "--read-xml", "%s/osm_idf/ile-de-france-220101.osm.gz" % output_path,
+        "--write-pbf", "%s/osm_idf/ile-de-france-220101.osm.pbf" % output_path
+    ])
 
 
     # Data set: GTFS
