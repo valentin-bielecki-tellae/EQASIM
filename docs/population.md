@@ -134,7 +134,7 @@ The geolocated enterprise census is available on data.gouv.fr:
 The French Buildings database is available from IGN:
 
 - [Buildings database](https://geoservices.ign.fr/bdtopo)
-- In the sidebar on the right, under *Téléchargement anciennes éditions*, click on *BD TOPO® 2022 GeoPackage Départements* to go to the saved data publications from 2022.
+- In the sidebar on the right, under *Téléchargement anciennes éditions*, click on *BD TOPO® 2024 GeoPackage Départements* to go to the saved data publications from 2024.
 - The data is split by department and they are identified with a number. For the Île-de-France region, download:
   - Paris (75)
   - Seine-et-Marne (77)
