@@ -1,7 +1,7 @@
 .. _contents:
 
 Eqasim documentation
-********************
+====================
 
 
 .. only:: html
@@ -14,7 +14,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum aliq
 Curabitur feugiat est et lacus imperdiet, vitae elementum felis auctor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque lectus lorem, dapibus ac cursus ac, malesuada ac quam. Aenean et nunc orci. Aliquam mollis nibh vel sapien posuere molestie. Ut ac quam a mi congue ullamcorper. Aenean tempus scelerisque felis, facilisis facilisis enim hendrerit ut. Morbi eleifend viverra eros, sed eleifend odio placerat sollicitudin. Sed nec ipsum aliquet metus mollis sollicitudin. Praesent auctor rhoncus ultricies. Ut sed nunc ac nisl eleifend varius ut et est. Nullam libero quam, aliquam eget aliquet non, facilisis in augue.
 
 Citing
-######
+------
 
 The main research reference for the synthetic population of Île-de-France is:
 
@@ -22,11 +22,12 @@ The main research reference for the synthetic population of Île-de-France is:
 
 
 Audience
-########
+--------
 
+TODO ?
 
 Publications
-############
+------------
 
 - Hörl, S. and M. Balac (2021) `Synthetic population and travel demand for Paris and Île-de-France based on open and publicly available data <https://www.sciencedirect.com/science/article/pii/S0968090X21003016>`_, *Transportation Research Part C*, **130**, 103291.
 - Hörl, S. and M. Balac (2021) `Open synthetic travel demand for Paris and Île-de-France: Inputs and output data <https://www.sciencedirect.com/science/article/pii/S2352340921008970>`_, *Data in Brief*, 107622.
@@ -34,12 +35,11 @@ Publications
 - Hörl, S. (2019) `An agent-based model of Île-de-France: Overview and first results <https://slides.com/sebastianhorl/matsim-paris>`_, presentation at Institut Paris Region, September 2019.
 
 License
-#######
+-------
 
 .. literalinclude:: ../LICENSE
 
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :hidden:
 
