@@ -9,7 +9,7 @@
 project = 'Eqasim'
 copyright = '2024, Eqasim contributors'
 author = 'Eqasim contributors'
-release = 'v1.2.0'
+release = 'v1.2.0'  # TODO: fetch from version.txt
 version = release[1:]
 
 # -- General configuration ---------------------------------------------------
