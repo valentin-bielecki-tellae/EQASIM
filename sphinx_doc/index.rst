@@ -43,3 +43,5 @@ License
 .. toctree::
    :hidden:
 
+   population
+   simulation
