@@ -17,6 +17,12 @@ version = release[1:]
 
 extensions = ['myst_parser']
 
+myst_enable_extensions = [
+    "attrs_inline",
+    "colon_fence",
+    "html_admonition"
+]
+
 source_suffix = ['.rst', '.md']
 
 templates_path = ['_templates']

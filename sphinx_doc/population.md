@@ -10,11 +10,12 @@ cities such as [Toulouse](cases/toulouse.md) or [Lyon](cases/lyon.md).
 
 This guide will cover the following steps:
 
-- [Gathering the data](#section-data)
+- [Gathering the data](#section-population-data)
 - [Running the pipeline](#section-population)
 - [Analysing synthetic population](#section-analysis)
 
-## <a name="section-data"></a>Gathering the data
+(section-population-data)=
+## Gathering the data
 
 To create the scenario, a couple of data sources must be collected. It is best
 to start with an empty folder, e.g. `/data`. All data sets need to be named
@@ -200,7 +201,8 @@ files should also be in place:
 - `data/egt_2010/Personnes_semaine.csv`
 - `data/egt_2010/Deplacements_semaine.csv`
 
-## <a name="section-population">Running the pipeline
+(section-population)=
+## Running the pipeline
 
 The pipeline code is available in [this repository](https://github.com/eqasim-org/ile-de-france).
 To use the code, you have to clone the repository with `git`:
@@ -279,13 +281,13 @@ activities, but in the spatial *GPKG* format. Activities contain point
 geometries to indicate where they happen and the trips file contains line
 geometries to indicate origin and destination of each trip.
 
-> [!WARNING]
-> Windows users :
-> 
-> The cache file paths can get very long and may break the 256 characters limit in the Microsoft Windows OS. In order to avoid any issue make sure the following regitry entry is set to **1** : `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\LongPathsEnabled`
-> 
-> You should also set git into *long path mode* by calling : `git config --system core.longpaths true`
 
+:::{warning} Windows users :
+
+The cache file paths can get very long and may break the 256 characters limit in the Microsoft Windows OS. In order to avoid any issue make sure the following regitry entry is set to **1** : `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\LongPathsEnabled`
+
+You should also set git into *long path mode* by calling : `git config --system core.longpaths true`
+:::
 
 
 ### Mode choice
@@ -425,7 +427,8 @@ config:
 Caution, this method will fail on communes where the Filosofi subpopulation distributions are missing. In this case,
 we fall back to the `uniform` method.
 
-## <a name="section-analysis"></a>Analysing synthetic population
+(section-analysis)=
+## Analysing synthetic population
 
 In addition to creating synthetic populations, it is possible to output files for analysis.
 
