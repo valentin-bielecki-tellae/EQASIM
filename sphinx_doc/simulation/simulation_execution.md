@@ -1,54 +1,4 @@
-# Running the Île-de-France MATSim simulation
-
-In order to run a simulation of Île-de-France in MATSIM, you first need
-to obtain or [generate a synthetic population](population.md). Afterwards, the
-pipeline provides additional stages to create and run a full MATSim scenario
-including a digital road and public transport network.
-
-This guide covers the following steps:
-
-- [Gathering additional data](#section-simulation-data)
-- [Running the simulation](#section-simulation)
-
-(section-simulation-data)=
-## Gathering additional data
-
-In this section we refere to the same data directory structure as described when
-gathering the data for the [synthetic population](population.md).
-
-### I) Road network (OpenStreetMap)
-
-The road network in the pipeline is based on OpenStreetMap data.
-A cut-out for Île-de-France is available from Geofabrik:
-
-- [Île-de-France OSM](https://download.geofabrik.de/europe/france/ile-de-france.html)
-- We recommend to use the fixed snapshot from 01/01/2022: [ile-de-france-220101.osm.pbf](https://download.geofabrik.de/europe/france/ile-de-france-220101.osm.pbf)
-- Download *ile-de-france-220101.osm.pbf* and put it into the folder `data/osm_idf`.
-
-### II) Public transit schedule (GTFS)
-
-A digital public transport schedule for Île-de-France is available from Île-de-France mobilités. Since 2023 you are required to create an account and accept the data license before making use of the data.
-
-- Go to [Île-de-France GTFS](https://prim.iledefrance-mobilites.fr/fr/donnees-statiques/offre-horaires-tc-gtfs-idfm)
-- Create an account "Connexion" on top of the page
-- Once you have created a valid account, go back to the page and click "Exporter la donnée"
-- In the popup window, accept the use conditions and select "CSV" type, then click "Télécharger" to download
-- The resulting file is not the data itself, but only contains a link to them. Open the downloaded CSV and find the URL starting with `https://data.iledefrance-mobilites.fr/api/v2/catalog/datasets/...`
-- Enter the URL in your browser and download the file `IDFM-gtfs.zip`
-- Put `IDFM-gtfs.zip` into the folder `data/gtfs_idf`
-
-Note that this schedule is updated regularly and is only valid for the next three
-weeks.
-
-### Overview
-
-In your directory structure, there should now be the following additional files:
-
-- `data/osm_idf/ile-de-france-latest.osm.pbf`
-- `data/gtfs_idf/IDFM-gtfs.zip`
-
-(section-simulation)=
-## Running the simulation
+# Running the simulation
 
 The pipeline can be used to generate a full runnable [MATSim](https://matsim.org/)
 scenario and run it for a couple of iterations to test it. For that, you need
@@ -123,7 +73,7 @@ config:
   mode_choice: true
 ```
 
-## <a name="section-data"></a>Optionnaly export detailed link geometries
+## Optionnaly export detailed link geometries
 
 When creating the matsim network from the OSM data, the `pt2matsim` project simplifies link geometries.
 You can export a `detailed_network.csv` file containing the detailed geometries of every network link by the following in the`config.yml` file :
@@ -137,7 +87,7 @@ config:
 # ...
 ```
 
-## <a name="section-data"></a>Using MATSim's emissions contrib
+## Using MATSim's emissions contrib
 
 In order to use a detailed emissions analysis, you need to let the pipeline generate a meaningful vehicle fleet. Data on the private vehicle stock across France are available from the Ministry of Ecology:
 

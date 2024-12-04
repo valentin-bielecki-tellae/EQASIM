@@ -37,7 +37,6 @@ html_baseurl = "https://eqasim.readthedocs.io/stable/"
 html_theme_options = {
     "collapse_navigation": True,
     "navigation_depth": 2,
-    "show_prev_next": False,
     "icon_links": [
         {"name": "Home Page", "url": html_baseurl, "icon": "fas fa-home"},
         {
