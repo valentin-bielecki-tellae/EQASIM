@@ -46,3 +46,4 @@ License
    population/population_summary
    simulation/simulation_summary
    cases/cases_summary
+   misc/misc_summary
