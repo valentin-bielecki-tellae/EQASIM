@@ -9,8 +9,10 @@
 project = 'Eqasim'
 copyright = '2024, Eqasim contributors'
 author = 'Eqasim contributors'
-release = 'v1.2.0'  # TODO: fetch from version.txt
-version = release[1:]
+
+# fetch version from version file
+with open("../VERSION", "r") as f:
+    release = version = f.readline()
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
