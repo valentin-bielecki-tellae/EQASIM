@@ -34,11 +34,6 @@ Publications
 - Hörl, S., M. Balac and K.W. Axhausen (2019) `Dynamic demand estimation for an AMoD system in Paris <https://ieeexplore.ieee.org/document/8814051>`_, paper presented at the 30th IEEE Intelligent Vehicles Symposium, Paris, June 2019.
 - Hörl, S. (2019) `An agent-based model of Île-de-France: Overview and first results <https://slides.com/sebastianhorl/matsim-paris>`_, presentation at Institut Paris Region, September 2019.
 
-License
--------
-
-.. literalinclude:: ../LICENSE
-
 
 .. toctree::
    :hidden:

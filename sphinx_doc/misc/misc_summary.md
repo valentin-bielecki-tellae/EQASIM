@@ -6,5 +6,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum aliq
 :titlesonly:
 
 changelog.md
+license.md
 old_changelog.md
 ```
