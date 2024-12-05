@@ -4,6 +4,8 @@
 
 To view the changes corresponding to each version, go see the [Changelog](changelog.md).
 
+You can find a mid/long term roadmap of Eqasim [here](roadmap.md).
+
 ## TODO: title
 
 ### Terms of service
@@ -23,6 +25,7 @@ Eqasim is under the [GPL-2.0 license](license.md).
 :hidden:
 
 changelog.md
+roadmap.md
 license.md
 old_changelog.md
 ```
