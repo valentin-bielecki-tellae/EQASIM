@@ -92,10 +92,10 @@ PERSON_FORMAT = [
     (84, 1, "PL0", "Modification des déplacements de la veille face au Covid"),
     (85, 1, "PL1A", "Type de changement privilégié #1"),
     (86, 1, "PL1B", "Type de changement privilégié #2"),
-    (87, 6, "PL1C", "Type de changement privilégié #3"),
+    (87, 1, "PL1C", "Type de changement privilégié #3"),
     (88, 8, "COPV", "Coefficient de redressement toutes personnes questions spécifiques à la vague 2"),
     (96, 8, "COOV", "Coefficient de redressement personnes enquêtées questions spécifiques à la vague 2"),
-    (68, 1, "PFIN", "FIN FICHIER PERSONNE")
+    (104, 1, "PFIN", "FIN FICHIER PERSONNE")
 ]
 
 TRIP_FORMAT = [

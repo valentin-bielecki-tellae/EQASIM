@@ -3,7 +3,7 @@ import pandas as pd
 
 from .format import HOUSEHOLD_FORMAT, PERSON_FORMAT, TRIP_FORMAT
 """
-This stage loads the raw data of the specified HTS (EDGT Loire Atlantique).
+This stage loads the raw data of the specified HTS (EMC² Vendée).
 
 Adapted from the first implementation by Valentin Le Besond (IFSTTAR Nantes)
 """
@@ -86,7 +86,7 @@ FILES = [
 def validate(context):
     for name in FILES:
         if not os.path.exists("%s/emc_85/%s" % (context.config("data_path"), name)):
-            raise RuntimeError("File missing from EDGT: %s" % name)
+            raise RuntimeError("File missing from EMC² vendée: %s" % name)
 
     return [
         os.path.getsize("%s/emc_85/%s" % (context.config("data_path"), name))

@@ -3,7 +3,7 @@ import numpy as np
 import data.hts.hts as hts
 
 """
-This stage cleans the Loire Atlantique emc.
+This stage cleans the Vendée emc.
 """
 
 def configure(context):
