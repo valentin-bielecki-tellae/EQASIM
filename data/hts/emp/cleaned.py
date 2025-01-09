@@ -110,8 +110,8 @@ def execute(context):
     df_households["departement_id"] = df_households["DEP_RES"].fillna("undefined").astype("category")
     df_persons["departement_id"] = df_persons["DEP_RES"].fillna("undefined").astype("category")
 
-    df_trips["origin_departement_id"] = df_trips["REG_ORI"].fillna("undefined").astype("category")
-    df_trips["destination_departement_id"] = df_trips["REG_DES"].fillna("undefined").astype("category")
+    df_trips["origin_departement_id"] = '00'
+    df_trips["destination_departement_id"] = '00'
 
     # Clean urban type
     df_households["urban_type"] = df_households["STATUTCOM_UU_RES"].replace({
@@ -224,10 +224,10 @@ def execute(context):
     df_persons["is_passenger"] = df_persons["person_id"].isin(
         df_trips[df_trips["mode"] == "car_passenger"]["person_id"].unique()
     )
-    print(len(df_persons))
-    #Force clean 
+    
+    #Drop person without right household size 
     df_persons = df_persons.drop(df_persons[(df_persons["number_of_trips"] == -1) & (df_persons['household_id'].isin([1647,6182,12630]))].index)
-    print(len(df_persons))
+    
     # Calculate consumption units
     hts.check_household_size(df_households, df_persons)
     df_households = pd.merge(df_households, hts.calculate_consumption_units(df_persons), on = "household_id")
